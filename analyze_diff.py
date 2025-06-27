@@ -108,8 +108,10 @@ def analyze_merge_issues(
 
     Provide a concise summary of potential issues, explain why they are issues, and suggest concrete mitigation strategies.
     If no obvious issues are apparent based on the provided diff, state that explicitly.
-    
-    IMPORTANT: On a new line at the very end of your response, provide an overall status using one of these exact phrases:
+
+    **IMPORTANT:** Format your response clearly using standard Markdown (e.g., bullet points, bold text, headings). **Keep individual lines of text reasonably concise for readability in various display widths, typically aiming for around 80-100 characters per line without horizontal scrolling.** Use newlines for paragraphs and list items to ensure proper wrapping.
+
+    On a new line at the very end of your response, provide an overall status using one of these exact phrases:
     "Overall Status: PASS" if no significant issues are found that require immediate attention or blocking.
     "Overall Status: FAIL" if significant issues (e.g., breaking changes, critical conflicts, severe vulnerabilities) are detected that warrant blocking or immediate review.
     """
