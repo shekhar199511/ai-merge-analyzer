@@ -131,7 +131,7 @@ runs:
           // Construct the comment body.
           let commentBody = `### AI Merge Analysis Report (${process.env.AI_PROVIDER_USED} - ${process.env.MODEL_USED}):\n\n`;
           if (report) {
-            commentBody += `\`\`\`\n${report}\n\`\`\`\n`;
+            commentBody += `${report}\n`;
           } else {
             commentBody += "Analysis could not be performed or returned no report.";
           }
