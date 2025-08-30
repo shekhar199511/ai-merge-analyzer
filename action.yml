@@ -124,15 +124,13 @@ runs:
       uses: actions/github-script@v7 # A powerful action to interact with GitHub API
       with:
         script: |
-          // Access the outputs from the 'analyze' step via environment variables.
           const report = process.env.AI_REPORT_OUTPUT;
           const status = process.env.AI_STATUS_OUTPUT;
 
-          // Construct the comment body.
           let commentBody = `### AI Merge Analysis Report (${process.env.AI_PROVIDER_USED} - ${process.env.MODEL_USED}):\n\n`;
+
           if (report) {
-            const cleanedReport = report.replace(/```[\s\S]*?```/g, '').replace(/^\s+/gm, '');
-            commentBody += `${cleanedReport}\n`;
+            commentBody += "```\n" + report.trim() + "\n```\n";
           } else {
             commentBody += "Analysis could not be performed or returned no report.";
           }
@@ -143,7 +141,6 @@ runs:
             commentBody += `\n**Overall Status: 🟢 PASSED (No major issues detected)**`;
           }
 
-          // Use GitHub's REST API to create a comment on the Pull Request.
           github.rest.issues.createComment({
             issue_number: context.issue.number,
             owner: context.repo.owner,
