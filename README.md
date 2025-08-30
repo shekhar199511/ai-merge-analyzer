@@ -24,41 +24,55 @@ An AI-powered GitHub Action designed to proactively identify potential issues du
 
 ## How can other projects use it?
 
-1. **Add the Action to Your Workflow:**
+To integrate Universal AI Merge Issue Analyzer into your project, follow these steps:
 
-   ```yaml
-   # .github/workflows/ai-merge-analyzer.yml
-   name: AI Merge Analysis
+### 1. Add the Action to Your Workflow
 
-   on:
-     pull_request:
+Create or update your workflow file (e.g., `.github/workflows/ai-merge-analyzer.yml`) with the following content:
 
-   jobs:
-     ai-merge-analysis:
-       runs-on: ubuntu-latest
-       steps:
-         - uses: actions/checkout@v4
-         - name: AI Merge Analyzer
-           uses: shekhar199511/ai-merge-analyzer@v1.0.0
-           with:
-             ai_provider: "openai" # or "gemini"
-             ai_api_key: ${{ secrets.AI_API_KEY }}
-             model_name: "gpt-4o" # or "gemini-2.0-flash"
-             api_base_url: "" # Optional
-   ```
+```yaml
+name: AI Merge Analysis
 
-2. **Store Your API Key:**
-   - Add your AI provider API key as a secret in your repository settings (e.g., `AI_API_KEY`).
+on:
+  pull_request:
 
-3. **Configure Inputs:**
-   - Choose your provider and model via workflow inputs.
-   - Optionally set a custom API endpoint.
+jobs:
+  ai-merge-analysis:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: AI Merge Analyzer
+        uses: shekhar199511/ai-merge-analyzer@v1.0.0
+        with:
+          ai_provider: "openai" # or "gemini"
+          ai_api_key: ${{ secrets.AI_API_KEY }}
+          model_name: "gpt-4o" # or "gemini-2.0-flash"
+          api_base_url: "" # Optional
+```
+
+### 2. Store Your API Key
+
+- Go to your repository’s **Settings > Secrets and variables > Actions**.
+- Click **New repository secret**.
+- Name it `AI_API_KEY` and paste your AI provider API key.
+
+### 3. Configure Inputs
+
+- Set `ai_provider` to your chosen provider (e.g., `openai`, `gemini`).
+- Set `model_name` to the model you want to use (e.g., `gpt-4o`, `gemini-2.0-flash`).
+- Optionally, set `api_base_url` if you use a custom endpoint.
+
+### 4. Commit and Push
+
+- Commit your workflow file and push it to your repository.
+- The action will run automatically on every pull request.
 
 ## What changes do other projects need to make?
 
-- **API Key:** Add your AI provider API key as a GitHub Secret.
-- **Workflow Update:** Add the action step to your PR workflow.
-- **Model/Provider Selection:** Update inputs to match your preferred AI provider and model.
+- **Add API Key:** Store your AI provider API key as a GitHub Secret named `AI_API_KEY`.
+- **Update Workflow:** Add the action step to your PR workflow file.
+- **Select Provider/Model:** Update workflow inputs to match your preferred AI provider and model.
+- **(Optional) Custom Endpoint:** Set `api_base_url` if you use a non-default endpoint.
 
 ## Flexibility Provided
 
@@ -92,4 +106,4 @@ or
 
 Contributions and suggestions are welcome! Please open issues or PRs for improvements.
 
-##
+## License
