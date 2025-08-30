@@ -131,7 +131,6 @@ runs:
           let commentBody = `### AI Merge Analysis Report (${provider} - ${model})\n\n`;
 
           // Example: Extract summary table from the report if present
-          // You may need to adjust this parsing based on your report format
           let summaryTable = '';
           if (report && report.includes('Summary Table:')) {
             const tableStart = report.indexOf('Summary Table:');
@@ -140,7 +139,7 @@ runs:
             commentBody += `**Summary of Issues:**\n\n${summaryTable}\n\n`;
           }
 
-          // Collapsible details for full report
+          // Collapsible details for full report, wrapped in Markdown code block for proper line wrapping
           commentBody += `<details>\n<summary>Full AI Analysis Report</summary>\n\n`;
           commentBody += "```\n" + report.trim() + "\n```\n";
           commentBody += `</details>\n`;
