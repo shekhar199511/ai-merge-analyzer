@@ -160,6 +160,18 @@ runs:
         AI_PROVIDER_USED: ${{ inputs.ai_provider }}
         MODEL_USED: ${{ inputs.model_name }}
 
+    - name: Debug GITHUB_TOKEN
+      shell: bash
+      run: |
+        if [ -z "$GITHUB_TOKEN" ]; then
+          echo "GITHUB_TOKEN is NOT set!"
+          exit 1
+        else
+          echo "GITHUB_TOKEN is set."
+        fi
+      env:
+        GITHUB_TOKEN: ${{ inputs.github_token }}
+
     - name: Post Inline Comments
       shell: bash
       env:
