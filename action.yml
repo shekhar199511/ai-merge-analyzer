@@ -91,6 +91,7 @@ runs:
         echo "EOF" >> $GITHUB_ENV
 
     - name: Generate Git Diff
+      shell: bash
       run: git diff origin/${{ github.event.pull_request.base.ref }}...${{ github.event.pull_request.head.ref }} > diff.txt
 
     # Step 4: Run the core AI analysis Python script.
