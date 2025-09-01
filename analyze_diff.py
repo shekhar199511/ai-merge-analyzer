@@ -91,17 +91,21 @@ def analyze_merge_issues(
     prompt = f"""
         You are an AI assistant specialized in identifying potential issues during code merges.
         Analyze the following Git diff content and highlight any potential:
-        1.  Merge Conflicts
-        2.  Breaking Changes
-        3.  Architectural Incompatibilities
-        4.  Dependency Conflicts
-        5.  Logical Errors/Unexpected Side Effects
-        6.  Performance or Scalability Regressions
-        7.  Security Vulnerabilities
-        8.  Secret or Credential Exposure
-        9.  Other Security Vulnerabilities
+        1. Merge Conflicts
+        2. Breaking Changes
+        3. Architectural Incompatibilities
+        4. Dependency Conflicts
+        5. Logical Errors/Unexpected Side Effects
+        6. Performance or Scalability Regressions
+        7. Security Vulnerabilities
+        8. Secret or Credential Exposure
+        9. Other Security Vulnerabilities
 
-        **IMPORTANT:** For each issue, specify the exact file name and line number as shown in the diff. Only comment on lines present in the diff. Do not invent or hallucinate line numbers or files.
+        **IMPORTANT INSTRUCTIONS:**
+        - For each issue, reference the **exact file name and line number** as shown in the diff.
+        - Only comment on lines present in the diff. Do **not invent or hallucinate** line numbers or files.
+        - Reference the **specific line** where the problematic code appears. If the issue spans multiple lines, use the first line where the problem starts.
+        - Avoid referencing unrelated lines or code that does not contain the issue.
 
         **Git Diff Content for Analysis:**
         ```diff
