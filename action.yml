@@ -67,7 +67,7 @@ runs:
     - name: Install dependencies
       shell: bash # Specifies the shell to use for this step
       run: |
-        pip install requests
+        pip install requests unidiff
 
     # Step 3: Generate the Git diff content.
     # This crucial step fetches the base branch and then calculates the diff
