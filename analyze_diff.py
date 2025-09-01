@@ -98,6 +98,8 @@ def analyze_merge_issues(
     5.  **Logical Errors/Unexpected Side Effects:** Subtle bugs or unintended consequences that might arise from the interaction of the changes.
     6.  **Performance or Scalability Regressions:** Changes that could negatively impact application performance or scalability.
     7.  **Security Vulnerabilities:** New patterns or modifications that introduce potential security risks.
+    8.  **Secret or Credential Exposure:** Look for hardcoded secrets, API keys, passwords, tokens, or any sensitive information that may have been added, modified, or exposed in the code diff.
+    9.  **Other Security Vulnerabilities:** Identify patterns that may introduce security risks, such as unsafe function usage, lack of input validation, or insecure configurations.
 
     Consider common development practices, module dependencies, and potential interactions between different parts of the codebase.
 
