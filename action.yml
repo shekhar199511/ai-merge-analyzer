@@ -163,7 +163,7 @@ runs:
     - name: Post Inline Comments
       shell: bash
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ inputs.github_token }}
         GITHUB_REPOSITORY: ${{ github.repository }}
         PR_NUMBER: ${{ github.event.pull_request.number }}
       run: python ${{ github.action_path }}/post_inline_comments.py
