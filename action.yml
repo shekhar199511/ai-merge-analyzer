@@ -98,7 +98,7 @@ runs:
       shell: bash
       run: |
         git fetch --all
-        git diff origin/${{ github.event.pull_request.base.ref }}...${{ github.event.pull_request.head.ref }} > diff.txt
+        git diff origin/${{ github.event.pull_request.base.ref }} ${{ github.event.pull_request.head.ref }} > diff.txt
 
     # Step 4: Run the core AI analysis Python script.
     # This step executes our Python script, passing inputs as environment variables.
