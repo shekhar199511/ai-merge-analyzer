@@ -89,34 +89,42 @@ def analyze_merge_issues(
     # Define the comprehensive prompt for the AI.
     # This prompt guides the AI on what to look for and how to format its response.
     prompt = f"""
-    You are an AI assistant specialized in identifying potential issues during code merges.
-    Analyze the following Git diff content and highlight any potential:
-    1.  **Merge Conflicts:** Direct line-by-line conflicts that Git might struggle with, or logical conflicts.
-    2.  **Breaking Changes:** Changes that might break existing functionality, APIs, or contracts in the target branch.
-    3.  **Architectural Incompatibilities:** Issues related to how new code integrates with the existing architecture, design patterns, or established modules.
-    4.  **Dependency Conflicts:** Changes in package versions, new dependencies, or dependency removals that might conflict or cause instability.
-    5.  **Logical Errors/Unexpected Side Effects:** Subtle bugs or unintended consequences that might arise from the interaction of the changes.
-    6.  **Performance or Scalability Regressions:** Changes that could negatively impact application performance or scalability.
-    7.  **Security Vulnerabilities:** New patterns or modifications that introduce potential security risks.
-    8.  **Secret or Credential Exposure:** Look for hardcoded secrets, API keys, passwords, tokens, or any sensitive information that may have been added, modified, or exposed in the code diff.
-    9.  **Other Security Vulnerabilities:** Identify patterns that may introduce security risks, such as unsafe function usage, lack of input validation, or insecure configurations.
+        You are an AI assistant specialized in identifying potential issues during code merges.
+        Analyze the following Git diff content and highlight any potential:
+        1.  Merge Conflicts
+        2.  Breaking Changes
+        3.  Architectural Incompatibilities
+        4.  Dependency Conflicts
+        5.  Logical Errors/Unexpected Side Effects
+        6.  Performance or Scalability Regressions
+        7.  Security Vulnerabilities
+        8.  Secret or Credential Exposure
+        9.  Other Security Vulnerabilities
 
-    Consider common development practices, module dependencies, and potential interactions between different parts of the codebase.
+        **IMPORTANT:** For each issue, specify the exact file name and line number as shown in the diff. Only comment on lines present in the diff. Do not invent or hallucinate line numbers or files.
 
-    **Git Diff Content for Analysis:**
-    ```diff
-    {diff_content}
-    ```
+        **Git Diff Content for Analysis:**
+        ```diff
+        {diff_content}
+        ```
 
-    Provide a concise summary of potential issues, explain why they are issues, and suggest concrete mitigation strategies.
-    If no obvious issues are apparent based on the provided diff, state that explicitly.
+        At the top of your response, include a Markdown table summarizing all detected issues. The table should have columns: File, Line, Issue, Severity. If no issues are found, state "No issues detected" in the table.
 
-    **IMPORTANT:** Format your response clearly using standard Markdown (e.g., bullet points, bold text, headings). **Keep individual lines of text reasonably concise for readability in various display widths, typically aiming for around 80-100 characters per line without horizontal scrolling.** Use newlines for paragraphs and list items to ensure proper wrapping.
+        After the table, for each issue, provide:
+        - File: <filename>
+        - Line: <line number>
+        - Problem: <description>
+        - Why: <reason>
+        - Solution: <suggested fix>
+        Separate each issue with '---'.
 
-    On a new line at the very end of your response, provide an overall status using one of these exact phrases:
-    "Overall Status: PASS" if no significant issues are found that require immediate attention or blocking.
-    "Overall Status: FAIL" if significant issues (e.g., breaking changes, critical conflicts, severe vulnerabilities) are detected that warrant blocking or immediate review.
-    """
+        If no obvious issues are apparent based on the provided diff, state that explicitly.
+
+        Format your response clearly using standard Markdown. Keep lines concise for readability.
+
+        On a new line at the very end of your response, provide an overall status using one of these exact phrases:
+        "Overall Status: PASS" or "Overall Status: FAIL"
+        """
 
     # Prepare headers for the API request
     headers = {
