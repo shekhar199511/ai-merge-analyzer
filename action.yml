@@ -130,14 +130,6 @@ runs:
 
           let commentBody = `### AI Merge Analysis Report (${provider} - ${model})\n\n`;
 
-          // Extract summary table if present
-          let summaryTable = '';
-          const summaryMatch = report.match(/Summary Table:\s*\n([\s\S]*?)(?:\n\n|$)/);
-          if (summaryMatch) {
-            summaryTable = summaryMatch[1].trim();
-            commentBody += `**Summary of Issues:**\n\n${summaryTable}\n\n`;
-          }
-
           // Collapsible details for full report
           commentBody += `<details>\n<summary>Full AI Analysis Report</summary>\n\n`;
           commentBody += "```\n" + report.trim() + "\n```\n";
